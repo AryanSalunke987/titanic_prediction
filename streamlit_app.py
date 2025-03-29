@@ -1,9 +1,8 @@
 import streamlit as st
 import numpy as np
-import joblib  # For loading the model
+import joblib 
 
-# Load trained model
-model = joblib.load("titanic_model.pkl")  # Make sure this path is correct!
+model = joblib.load("titanic_model.pkl")  
 
 # Title
 st.title("🚢 Titanic Survivor Prediction")
@@ -17,14 +16,13 @@ Parch = st.number_input("Parents/Children Aboard (Parch)", min_value=0, max_valu
 Fare = st.number_input("Fare ($)", min_value=0.0, max_value=500.0, value=50.0)
 Embarked = st.selectbox("Port of Embarkation", ["C", "Q", "S"])
 
-# Encode categorical features
+# categorical features
 Sex = 1 if Sex == "Male" else 0  # Convert Male=1, Female=0
 
-# Encode 'Embarked'
-embarked_mapping = {"C": 0, "Q": 1, "S": 2}  # Adjust based on training data
+embarked_mapping = {"C": 0, "Q": 1, "S": 2}  
 Embarked = embarked_mapping[Embarked]
 
-# Create input array
+# input array
 input_data = np.array([Pclass, Sex, Age, SibSp, Parch, Fare, Embarked]).reshape(1, -1)
 
 # Prediction
